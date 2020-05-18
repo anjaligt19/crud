@@ -1,0 +1,29 @@
+<div class="col-md-12">
+  <h2> User Details</h2>
+  <button class="btn btn-danger" (click)="addUser()"> Add User</button>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      
+      <th>FullName</th>
+      
+      <th>Email</th>
+      <th>DOB</th>
+      <th>Designation</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{user.full_name}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.dob}}</td>
+      <td>{{user.designation}}</td>
+      <td><button class="btn btn-danger" (click)="deleteUser(user)"> Delete</button>
+        <button class="btn btn-danger" (click)="editUser(user)" style="margin-left: 20px;"> Edit</button>
+        <button *ngIf="user.is_active==0" class="btn btn-danger" (click)="updateStatus(user)" style="margin-left: 20px;"> Approve</button>
+        <button *ngIf="user.is_active==1" class="btn btn-danger" (click)="updateStatus(user)" style="margin-left: 20px;"> Deactivate</button>
+        </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

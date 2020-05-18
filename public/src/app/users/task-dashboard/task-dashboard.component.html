@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-md-4">
+    <div id="draggable-move" class="card" *ngFor="let toDoTsk of taskData.toDoTask; let i = index">
+      <h5 class="card-header primary-color white-text" *ngIf="i==0">To Do</h5>
+      <div class="card-body">
+        <p class="card-text">{{toDoTsk.name}}<span (click)="updateTaskStatus(toDoTsk, 1)" class="btn btn-success custom-btn">Move to In-Progress</span></p>
+      </div>
+    </div>
+    <!-- <div id="draggable-move" class="card">
+      <div class="card-body">
+        <p class="card-text">I have a 'move' cursor positioned in the center</p>
+      </div>
+    </div>
+    <div id="draggable-move" class="card">
+      <div class="card-body">
+        <p class="card-text">I have a 'move' cursor positioned in the center</p>
+      </div>
+    </div> -->
+  </div>
+
+  <div class="col-md-4">
+  
+    <div id="draggable-pointer" class="card" *ngFor="let progTsk of taskData.inProgTask; let j = index">
+      <h5 class="card-header deep-orange white-text" *ngIf="j==0">In Progress</h5>
+      <div class="card-body">
+        <p class="card-text">{{progTsk.name}}<span (click)="updateTaskStatus(progTsk, 2)" class="btn btn-success custom-btn">Move to Completed</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div id="draggable-crosshair" class="card" *ngFor="let compTsk of taskData.compTask; let i = index">
+      <h5 class="card-header success-color white-text" *ngIf="i==0">Completed</h5>
+      <div class="card-body">
+        <p class="card-text">{{compTsk.name}}</p>
+      </div>
+    </div>
+  </div>
+</div>

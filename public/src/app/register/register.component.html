@@ -1,0 +1,76 @@
+<h2>Register</h2>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="firstName">Full Name:</label>
+      <input formControlName="full_name" placeholder="Full Name" name="full_name" class="form-control" id="full_name" [ngClass]="{ 'is-invalid': submitted && f.full_name.errors }">
+      <div *ngIf="submitted && registerForm.controls.full_name.errors" class="invalid-feedback">
+          <div *ngIf="registerForm.controls.full_name.errors.required">Fullname is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Email </label>
+      <input type="text" formControlName="email" placeholder="Email" (focusout)="chkEmailInDB($event)" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+          <div *ngIf="f.email.errors.required">Email is required</div>
+          <div *ngIf="f.email.errors.pattern">Email must be a valid email address</div>
+      </div>
+      <div *ngIf="emailExists" class="text-danger">
+            <span *ngIf="emailExists" >Email already exists</span>
+          </div>
+	</div>
+    
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" formControlName="password" placeholder="Password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">DOB:</label>
+      <input formControlName="dob" placeholder="DOB" name="dob" class="form-control" id="dob" [ngClass]="{ 'is-invalid': submitted && f.dob.errors }">
+      <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
+            <div *ngIf="f.dob.errors.required">DOB is required</div>
+      </div>
+      
+    </div>
+     
+     <!-- <div class="form-group">
+      <label for="lastName">DOBN:</label>
+      <input formControlName="dob" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+    </div> -->
+
+    <!-- <ngb-datepicker #dp (select)="onDateSelection($event)" outsideDays="hidden" >
+      </ngb-datepicker>
+
+      <ng-template #t let-date let-focused="focused">
+        <span class="custom-day"
+            [class.focused]="focused"
+            [class.range]="isRange(date)"
+            [class.faded]="isHovered(date) || isInside(date)"
+            (mouseenter)="hoveredDate = date"
+            (mouseleave)="hoveredDate = null">
+        {{ date.day }}
+      </span>
+    </ng-template> -->
+
+    <div class="form-group">
+      <label for="lastName">Designation:</label>
+      <input formControlName="designation" placeholder="Designation" name="designation" class="form-control" id="designation" [ngClass]="{ 'is-invalid': submitted && f.designation.errors }">
+      <div *ngIf="submitted && f.designation.errors" class="invalid-feedback">
+            <div *ngIf="f.designation.errors.required">Designation is required</div>
+      </div>
+    </div>
+
+    <input formControlName="role_id" type="hidden" name="role_id" [(ngModel)]="role_id">
+
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Register
+        </button>
+        <a routerLink="/" class="btn btn-link">Cancel</a>
+    </div>
+</form>

@@ -1,0 +1,33 @@
+<div class="col-md-6">
+  <h2 class="text-center">Edit Task</h2>
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="Name">Name:</label>
+      <input formControlName="name" placeholder="Name" name="name" class="form-control" id="name">
+      <div *ngIf="submitted && editForm.controls.name.errors" class="error">
+          <div *ngIf="editForm.controls.name.errors.required">Name is required</div>
+      </div>
+    </div>
+
+    
+
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea formControlName="description" name="description" class="form-control"  id="description" ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Assign To:</label>
+      <select formControlName="user_id" name="user_id" id="user_id" class="form-control" required>
+              <option value="">Select Assignee</option>
+              <option value="{{ user.id }}" *ngFor="let user of users">{{ user.full_name }}</option>
+          </select>
+          <div *ngIf="submitted && editForm.controls.user_id.errors" class="error">
+          <div *ngIf="editForm.controls.user_id.errors.required">Assignee is required</div>
+      </div>
+    </div>
+
+    <button class="btn btn-success">Update</button>
+  </form>
+</div>

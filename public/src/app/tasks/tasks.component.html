@@ -1,0 +1,30 @@
+<div class="col-md-12">
+  <h2> Task Details</h2>
+  <button class="btn btn-danger" (click)="addTask()"> Add Task</button>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Assign To</th>
+      <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let task of tasks.data">
+      <td>{{task.name}}</td>
+      <td>{{task.description}}</td>
+      <td>{{task.full_name}}</td>
+      <td><span *ngIf="task.status==0">To-Do</span>
+      	  <span *ngIf="task.status==1">In progress</span>
+      	  <span *ngIf="task.status==2">Completed</span>
+      </td>
+      <td><button class="btn btn-danger" (click)="deleteTask(task)"> Delete</button>
+        <button class="btn btn-danger" [disabled]="task.status==2" (click)="editTask(task)" style="margin-left: 20px;"> Edit</button>
+        <button *ngIf="task.is_active==0" class="btn btn-danger" (click)="updateStatus(task)" style="margin-left: 20px;"> Approve</button>
+        <button *ngIf="task.is_active==1" class="btn btn-danger" (click)="updateStatus(task)" style="margin-left: 20px;"> Deactivate</button>
+        </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,56 @@
+<div class="col-md-6">
+  <h2 class="text-center">Add User</h2>
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+   
+    <!-- <div class="form-group">
+        <img [src]="url" height="200"> <br/>
+        <input type='file' formControlName="file" class="form-control" (change)="onSelectFile($event)">
+    </div> -->
+
+    <div class="form-group">
+      <label for="firstName">Full Name:</label>
+      <input formControlName="full_name" placeholder="Full Name" name="full_name" class="form-control" id="full_name">
+      <div *ngIf="submitted && addForm.controls.full_name.errors" class="error">
+          <div *ngIf="addForm.controls.full_name.errors.required">Fullname is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="text" formControlName="email" placeholder="Email" class="form-control" (focusout)="chkEmailInDB($event)" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+          <div *ngIf="f.email.errors.required">Email is required</div>
+          <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+      </div>
+      <div *ngIf="emailExists" class="text-danger">
+            <span *ngIf="emailExists" >Email already exists</span>
+          </div>
+  </div>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" formControlName="password" placeholder="Password" name="password" class="form-control" id="password">
+      <div *ngIf="submitted && addForm.controls.password.errors" class="error">
+          <div *ngIf="addForm.controls.password.errors.required">Password is required</div>
+          <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+        </div>
+    </div>
+
+    
+
+    <div class="form-group">
+      <label for="lastName">DOB:</label>
+      <input formControlName="dob" placeholder="DOB" name="dob" class="form-control" id="dob">
+      <!-- <ng2-datepicker [options]="options" [(ngModel)]="date">
+</ng2-datepicker> -->
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Designation:</label>
+      <input formControlName="designation" placeholder="designation" name="designation" class="form-control" id="designation">
+    </div>
+
+    <input formControlName="role_id" type="hidden" name="role_id" [(ngModel)]="role_id">
+    <button class="btn btn-success">Add</button>
+  </form>
+</div>
